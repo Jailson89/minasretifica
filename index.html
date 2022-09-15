@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style type="text/css">
+            .toolbar {
+              background-color: #d11111 !important;
+			  box-shadow: 0px 2px 5px black;
+            }
+        </style>
+	</head>
+	<body ng-app="MinasRetifica">
+		<md-content>
+			<md-toolbar class="toolbar">
+				<div class="md-toolbar-tools">
+	
+				  <h2 flex md-truncate>Minas Retifica</h2>
+		  
+				</div>
+			  </md-toolbar>
+			  <br>
+		</md-content>
+		<div ng-controller="MinasRetificaController">
+			
+		</div>
+		<script src="node_modules/angular/angular.js"></script>
+		<script src="node_modules/angular-aria/angular-aria.js"></script>
+		<script src="node_modules/angular-animate/angular-animate.js"></script>
+		<script src="node_modules/angular-messages/angular-messages.js"></script>
+		<script src="node_modules/angular-material/angular-material.js"></script>
+		<script>
+		// Include app dependency on ngMaterial
+			var MinasRetifica = angular.module('MinasRetifica', ['ngMaterial', 'ngMessages']);
+			
+			MinasRetifica.controller("MinasRetificaController", ['$scope', function($scope) {
+			    var vm = $scope;
+				vm.teste = "jailson";
+
+			}]);
+		
+		</script>
+	</body>
+</html>
