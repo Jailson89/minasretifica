@@ -12,20 +12,20 @@
             .toolbar {
 			
 				position: fixed;
-    		  top: 0;
-              background-color: #d11111 !important;
-			  box-shadow: 0px 2px 5px black;
+				top: 0;
+				background-color: #d11111 !important;
+				box-shadow: 0px 2px 5px black;
 
             }
 			.labelCLientes {
 
 				font-size: 20px;
 				color: dimgrey;
-				margin-left: 15px;
+				margin-left: 25px;
 				
 			}
 			.clientesControler {
-				padding:20px;
+				padding:15px;
 			}
 			.clientes {
 
@@ -41,17 +41,19 @@
 			</div>
 		</md-toolbar>
 		<br>
+
 		
-		<div class="conteudoCliente" layout="column" style="height:600px" ng-cloak>
-			
+		<label class="labelCLientes">
+			Clientes
+		</label>
+		<br><br><br><br><br><br>
+
+		
+		<div class="conteudoCliente" layout="column" style="height:300px" ng-cloak>
 			<md-content flex > 
 				
 				<div flex class="clientesControler" ng-controller="ClientesController">
 					
-					<label class="labelCLientes">
-						Clientes
-					  </label><br><br><br>
-	
 					<md-list-item  ng-repeat="cliente in clientes" class="secondary-button-padding" ng-click="doPrimaryAction($event)">
 						<p>{{ cliente.nome }}</p>
 						<p>{{ cliente.telefone }}</p>
@@ -65,8 +67,6 @@
 	
 			</md-content>
 		</div>
-
-		
 		
 		<script src="../node_modules/angular/angular.js"></script>
 		<script src="../node_modules/angular-aria/angular-aria.js"></script>
