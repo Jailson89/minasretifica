@@ -61,6 +61,9 @@
 						<md-button ng-click="editarCliente()" class="md-icon-button" aria-label="More">
 							<md-icon>edit</md-icon>
 						</md-button>
+						<md-button ng-click="editarCliente()" class="md-icon-button" aria-label="More">
+							<md-icon>delete</md-icon>
+						</md-button>
 					</md-list-item>
 			
 				</div>
@@ -77,28 +80,38 @@
 		// Include app dependency on ngMaterial
 			var Clientes = angular.module('Clientes', ['ngMaterial', 'ngMessages']);
 			
-			Clientes.controller("ClientesController", ['$scope', function($scope) {
+			Clientes.controller("ClientesController", ['$scope','$http', function($scope, $http) {
 			    var vm = $scope;
-				vm.clientes = [
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true},
-								{nome:'jailson', telefone:'(27) 981720628', endereco: 'Rua Juscelino Kubitscheck de Oliveira, 11, Tabajara...', selected:true}
-							];
-				vm.editarCliente = function (){
+				
+				vm.atualizarCliente = function (){
 
 					alert('Editando cliente');
 
 				};
+				vm.deletarCliente = function (){
+
+					alert('Editando cliente');
+
+				};
+				vm.inserirCliente = function (){
+
+					alert('Editando cliente');
+
+				};
+				vm.buscarClientes = function(){
+
+					$http.get('http://localhost/oficina/clientes', {}).then(function(resposta){
+
+						vm.clientes = resposta.data;
+
+					}, function(erro){
+
+						alert(erro);
+
+					});
+
+				}
+				vm.buscarClientes();
 			
 			}]);
 		
