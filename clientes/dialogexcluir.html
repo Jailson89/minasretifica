@@ -1,0 +1,21 @@
+﻿<md-dialog aria-label="Cadastrar cliente">
+  <md-dialog-content flex>
+    <div layout="column" class="md-dialog-content">
+      <h2 class="md-title ng-binding">Tem certeza que deseja excluir o cliente?</h2>
+      <div ng-if="::!dialog.mdHtmlContent" class="md-dialog-content-body ng-scope">
+        <p class="ng-binding">Todas as informações relacionadas serão perdidas.</p>
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <button class="md-primary md-cancel-button md-button ng-scope md-default-theme md-ink-ripple" type="button"
+      ng-transclude="" ng-if="dialog.$type === 'confirm' || dialog.$type === 'prompt'" ng-click="dialog.abort()"
+      style="">Cancelar</button><!-- end ngIf: dialog.$type === 'confirm' || dialog.$type === 'prompt' -->
+      <button
+      class="md-primary md-confirm-button md-button md-ink-ripple md-default-theme" type="button" ng-transclude=""
+      ng-click="dialog.hide()" md-autofocus="dialog.$type==='alert'"
+      ng-disabled="dialog.required &amp;&amp; !dialog.result">Sim</button>
+  </md-dialog-actions>
+  </form>
+</md-dialog>
