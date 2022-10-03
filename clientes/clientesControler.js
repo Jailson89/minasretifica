@@ -1,14 +1,22 @@
 // Include app dependency on ngMaterial
 var Clientes = angular.module('Clientes', ['ngMaterial', 'ngMessages']);
 			
-Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', function($scope, $http, $mdDialog) {
+Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdToast', '$log', function($scope, $http, $mdDialog, $mdToast, $log) {
     var vm = $scope;
     vm.status = false;
     vm.controller = this;
     vm.customFullscreen = false;
-
+    
+    vm.showSimpleToast = function(mensagem) {
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(mensagem)
+            .position('top right')
+            .hideDelay(4000)
+        );
+    };
+  
     vm.buscarClientes = function(){
-
         $http.get('http://localhost/oficina/clientes', {}).then(function(resposta){
 
             vm.clientes = resposta.data;
@@ -21,35 +29,33 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', functi
 
     }
     
-
     vm.buscarClientes();
 
     vm.inserirCliente = function (cliente){
+       
         $http({
             url: 'http://localhost/oficina/clientes/',
             method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-Type': 'application/json; charset=UTF-8'
             },
             isArray: false,
             data: cliente
-        })
-        .then(function(response) {
-                console.log('Cliente salvo');
+        }).then(function(response){
+            vm.showSimpleToast('Cliente salvo com sucesso!');
+            vm.buscarClientes();
+            $mdDialog.hide();
         }, 
         function(response) { // optional
-            console.log('Erro ao salvar Cliente');
+            $mdDialog.hide();
         });
 
     };
    
     vm.atualizarCliente = function (){
-
         alert('Editando cliente');
-
     };
 
-        
     vm.deletar = function(id) {
         var idCliente = id;
         var confirm = $mdDialog.confirm()
@@ -75,10 +81,12 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', functi
                 data: id
             })
             .then(function(response) {
-                    console.log('Cliente salvo');
+                vm.showSimpleToast('Cliente excluído sucesso!');
+                vm.buscarClientes();
             }, 
             function(response) { // optional
-                console.log('Erro ao salvar Cliente');
+                console.log(response);
+                vm.showSimpleToast('Erro ao excluir cliente!');
             }); 
         })
     };
@@ -96,9 +104,8 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', functi
         };
 
         $scope.salvar = function (cliente) {
-
+            vm.salvando = true;
             vm.inserirCliente(cliente);
-            $mdDialog.hide();
 
         };
         $scope.maskTelefone = function(v) {

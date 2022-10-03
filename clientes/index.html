@@ -1,61 +1,63 @@
 ﻿<!DOCTYPE html>
-	<head>
-	  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../node_modules/angular-material/angular-material.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link href="../css/clientes.css" rel="stylesheet">
-        <style type="text/css"></style>
-	</head>
-	<body ng-app="Clientes">
-		<md-toolbar md-scroll-shrink ng-if="true" class="toolbar">
-			<div class="md-toolbar-tools">
-			  <h2 flex md-truncate>Minas Retifica</h2>
-			</div>
-		</md-toolbar>
-		<br>
-		<label class="labelCLientes">
-			Clientes
-		</label>
-		<br><br><br><br>
+<head>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../node_modules/angular-material/angular-material.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="../css/clientes.css" rel="stylesheet">
+	<style type="text/css"></style>
+</head>
 
-		<div ng-controller="ClientesController" class="conteudoCliente" layout="column" style="height:400px" ng-cloak>
-			<div>
-			<md-button class="md-raised md-primary" ng-click="showAdvanced($event)" >Adicionar</md-button></div>
-			<br>
-			<md-content flex class="listaClientes"> 
-				<div  class="clientesControler" ng-controller="ClientesController" >
-					<md-list class="gridCLientes" >
-						<md-list-item class="secondary-button-padding">
-							<span class="nome">Nome</span>
-							<span class="telefone">Telefone</span>
-							<span class="cpf">CPF</span>
-							<span flex-gt-xs  class="endereco">Endereço</span>
-						</md-list-item>
-						<md-list-item flex ng-repeat="cliente in clientes" class="secondary-button-padding" ng-click="doPrimaryAction($event)">
-							
-							<span class="nome">{{ cliente.nome }}</span>
-							<span class="telefone">{{ cliente.telefone }}</span>
-							<span class="cpf">{{ cliente.cpf }}</span>
-							<span flex class="endereco">{{ cliente.endereco }}</span>
-							
-					
-							<md-button ng-click="editarCliente()" class="md-icon-button" aria-label="More">
-								<md-icon>edit</md-icon>
-							</md-button>
-							<md-button ng-click="deletar(cliente.id);" class="md-icon-button rigth" aria-label="More">
-								<md-icon>delete</md-icon>
-							</md-button>
-						</md-list-item>
-					</md-list>
-				</div>
-	
-			</md-content>
+<body ng-app="Clientes">
+	<md-toolbar md-scroll-shrink ng-if="true" class="toolbar">
+		<div class="md-toolbar-tools">
+			<h2 flex md-truncate>Minas Retifica</h2>
 		</div>
-		<script src="../node_modules/angular/angular.js"></script>
-		<script src="../node_modules/angular-aria/angular-aria.js"></script>
-		<script src="../node_modules/angular-animate/angular-animate.js"></script>
-		<script src="../node_modules/angular-messages/angular-messages.js"></script>
-		<script src="../node_modules/angular-material/angular-material.js"></script>
-		<script src="clientesControler.js"></script>
-	</body>
+	</md-toolbar>
+	<br>
+	<label class="labelCLientes">
+		Clientes
+	</label>
+	<br><br><br><br>
+
+	<div ng-controller="ClientesController" id="toast-container" class="conteudoCliente" layout="column" style="height:400px" ng-cloak>
+		<div >
+			<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">Adicionar</md-button>
+		</div>
+		<md-content flex class="listaClientes">
+			<div class="clientesControler" ng-controller="ClientesController">
+				<md-list class="gridCLientes">
+					<md-list-item class="secondary-button-padding">
+						<span class="nome">Nome</span>
+						<span class="telefone">Telefone</span>
+						<span class="cpf">CPF</span>
+						<span flex-gt-xs class="endereco">Endereço</span>
+					</md-list-item>
+					<md-list-item flex ng-repeat="cliente in clientes" class="secondary-button-padding"
+						ng-click="doPrimaryAction($event)">
+
+						<span class="nome">{{ cliente.nome }}</span>
+						<span class="telefone">{{ cliente.telefone }}</span>
+						<span class="cpf">{{ cliente.cpf }}</span>
+						<span flex class="endereco">{{ cliente.endereco }}</span>
+
+
+						<md-button ng-click="editarCliente()" class="md-icon-button" aria-label="More">
+							<md-icon>edit</md-icon>
+						</md-button>
+						<md-button ng-click="deletar(cliente.id);" class="md-icon-button rigth" aria-label="More">
+							<md-icon>delete</md-icon>
+						</md-button>
+					</md-list-item>
+				</md-list>
+			</div>
+		</md-content>
+	</div>
+	<script src="../node_modules/angular/angular.js"></script>
+	<script src="../node_modules/angular-aria/angular-aria.js"></script>
+	<script src="../node_modules/angular-animate/angular-animate.js"></script>
+	<script src="../node_modules/angular-messages/angular-messages.js"></script>
+	<script src="../node_modules/angular-material/angular-material.js"></script>
+	<script src="clientesControler.js"></script>
+</body>
+
 </html>
