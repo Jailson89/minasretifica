@@ -6,6 +6,7 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
     vm.status = false;
     vm.controller = this;
     vm.customFullscreen = false;
+    vm.clientes = [];
     
     vm.showSimpleToast = function(mensagem) {
         $mdToast.show(
@@ -15,11 +16,26 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
             .hideDelay(4000)
         );
     };
-  
-    vm.buscarClientes = function(){
-        $http.get('http://localhost/oficina/clientes', {}).then(function(resposta){
 
-            vm.clientes = resposta.data;
+    vm.limparListaClientes = function (){
+        console.log('limpar inicio', vm.clientes);
+        
+        while(vm.clientes.length > 0)
+        vm.clientes.pop()
+        vm.clientes = [];
+    //vm.clientes.splice(0, quantidade);
+        console.log('limpar fim', vm.clientes);
+
+    };
+
+    vm.buscarClientes = function(){
+
+        $http.get('http://localhost/oficina/clientes', {}).then(function(resposta){
+           
+            vm.limparListaClientes();
+            angular.forEach(resposta.data, function(value) {
+                vm.clientes.push(value);
+            });
 
         }, function(erro){
 
@@ -57,7 +73,6 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
     };
 
     vm.deletar = function(id) {
-        var idCliente = id;
         var confirm = $mdDialog.confirm()
         .title('Tem certeza que deseja excluir o cliente?')
         .textContent('Todas as informações relacionadas serão perdidas.')
