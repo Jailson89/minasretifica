@@ -61,6 +61,7 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
             vm.showSimpleToast('Cliente salvo com sucesso!');
             vm.buscarClientes();
             $mdDialog.hide();
+			window.location.reload();
         }, 
         function(response) { // optional
             $mdDialog.hide();
