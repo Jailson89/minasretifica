@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../node_modules/angular-material/angular-material.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="../css/pecas.css" rel="stylesheet">
+	<style type="text/css"></style>
+</head>
+
+<body ng-app="Pecas">
+	<md-toolbar md-scroll-shrink ng-if="true" class="toolbar">
+		<div class="md-toolbar-tools">
+			<h2 flex md-truncate>Minas Retifica</h2>
+		</div>
+	</md-toolbar>
+	<br>
+	<label class="labelPecas">
+		Pecas
+	</label>
+	<br><br><br><br>
+	<div ng-controller="PecasController" id="toast-container" class="conteudoPeca" layout="column" style="height:500px" ng-cloak>
+		<div >
+			<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">Adicionar</md-button>
+		</div>
+		<md-content flex class="listaPecas">
+			<div class="pecasControler" ng-controller="PecasController">
+				<md-list class="gridPecas">
+					<md-list-item class="secondary-button-padding">
+						<span class="nome">Nome</span>
+						<span class="descricao">Descrição</span>
+						<span class="valor">Valor</span>
+					</md-list-item>
+					<md-list-item flex ng-repeat="peca in pecas" class="secondary-button-padding"
+						ng-click="doPrimaryAction($event)">
+
+						<span class="nome">{{ peca.nome }}</span>
+						<span class="descricao">{{ peca.descricao }}</span>
+						<span class="valor">{{ peca.valor }}</span>
+						
+						<md-button ng-click="editarPeca()" class="md-icon-button" aria-label="More">
+							<md-icon>edit</md-icon>
+						</md-button>
+						<md-button ng-click="deletar(peca.id);" class="md-icon-button rigth" aria-label="More">
+							<md-icon>delete</md-icon>
+						</md-button>
+					</md-list-item>
+				</md-list>
+			</div>
+		</md-content>
+	</div>
+	<script src="../node_modules/angular/angular.js"></script>
+	<script src="../node_modules/angular-aria/angular-aria.js"></script>
+	<script src="../node_modules/angular-animate/angular-animate.js"></script>
+	<script src="../node_modules/angular-messages/angular-messages.js"></script>
+	<script src="../node_modules/angular-material/angular-material.js"></script>
+	<script src="pecasControler.js"></script>
+</body>
+</html>
