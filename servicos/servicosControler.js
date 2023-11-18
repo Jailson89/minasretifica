@@ -1,4 +1,4 @@
-var Servicos = angular.module('Servicos',['ngMaterial','ngMessages']);
+﻿var Servicos = angular.module('Servicos',['ngMaterial','ngMessages']);
 
 Servicos.controller("ServicosController",['$scope', '$http', '$mdDialog', '$mdToast', '$log', function($scope,$http, $mdDialog, $mdToast, $log){
     var vm = $scope;
@@ -97,7 +97,7 @@ Servicos.controller("ServicosController",['$scope', '$http', '$mdDialog', '$mdTo
             })
             .then(function(response) {
                 vm.showSimpleToast('Serviço excluído sucesso!');
-                vm.buscarServiços();
+                vm.buscarServicos();
             }, 
             function(response) { // optional
                 console.log(response);
