@@ -18,14 +18,10 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
     };
 
     vm.limparListaClientes = function (){
-        console.log('limpar inicio', vm.clientes);
-        
+
         while(vm.clientes.length > 0)
         vm.clientes.pop()
         vm.clientes = [];
-    //vm.clientes.splice(0, quantidade);
-        console.log('limpar fim', vm.clientes);
-
     };
 
     vm.buscarClientes = function(){
@@ -44,6 +40,7 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
         });
 
     }
+
     
     vm.buscarClientes();
 
@@ -69,8 +66,26 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
 
     };
    
-    vm.atualizarCliente = function (){
-        alert('Editando cliente');
+    vm.atualizarCliente = function (cliente){
+        
+		$http({
+            url: 'http://localhost/oficina/clientes/',
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            isArray: false,
+            data: cliente
+        }).then(function(response){
+            vm.showSimpleToast('Cliente salvo com sucesso!');
+            vm.buscarClientes();
+            $mdDialog.hide();
+			window.location.reload();
+        }, 
+        function(response) { // optional
+            $mdDialog.hide();
+        });
+		
     };
 
     vm.deletar = function(id) {
@@ -101,7 +116,6 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
                 vm.buscarClientes();
             }, 
             function(response) { // optional
-                console.log(response);
                 vm.showSimpleToast('Erro ao excluir cliente!');
             }); 
         })
@@ -109,8 +123,7 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
 
     function DialogController($scope, $mdDialog) {
         
-        $scope.cliente ={nome:'Jailson Alves Correia', telefone:'27981720628', cpf:'05835409702', endereco: 'Rua Juscelino Kubitscheck Oliveira'};
-
+		
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -145,12 +158,79 @@ Clientes.controller("ClientesController", ['$scope','$http', '$mdDialog', '$mdTo
         }
     }
 
+	function DialogEditarClienteController($scope, $mdDialog) {
+        
+	
+		$scope.cliente = vm.cliente;
+	
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+        $scope.salvar = function (cliente) {
+			
+            vm.salvando = true;
+            vm.atualizarCliente(cliente);
+
+        };
+        $scope.maskTelefone = function(v) {
+
+            if( v != undefined)
+            {
+                let r = v.replace(/\D/g, "");
+                r = r.replace(/^0/, "");
+
+                if (r.length > 10) {
+                    r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+                } else if (r.length > 7) {
+                    r = r.replace(/^(\d\d)(\d{5})(\d{0,4}).*/, "($1) $2-$3");
+                } else if (r.length > 2) {
+                    r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+                } else if (v.trim() !== "") {
+                    r = r.replace(/^(\d*)/, "($1");
+                }
+                $scope.cliente.telefone=r;
+            }
+        }
+    }
+
+	vm.editarCliente = function (cliente) {
+		
+		
+		vm.cliente = cliente;
+		$mdDialog.show({
+			
+			templateUrl: 'dialogEditar.html',
+			controller: DialogEditarClienteController,
+			cliente: cliente,
+			// Appending dialog to document.body to cover sidenav in docs app
+			// Modal dialogs should fully cover application to prevent interaction outside of dialog
+			parent: angular.element(document.body),
+			targetEvent: cliente,
+			clickOutsideToClose: true,
+			fullscreen: vm.customFullscreen
+
+		}).then(function (cliente) {
+				 
+				
+				console.log(vm.cliente);
+				vm.status = 'You said the information was "' + answer + '".';
+			}, function () {
+				vm.status = 'You cancelled the dialog.';
+		});
+		
+	};
+
+
     vm.showAdvanced = function (ev) {
         $mdDialog.show({
             
             templateUrl: 'dialog.html',
-            controller: DialogController,
-            
+            controller: DialogEditarClienteController,
             // Appending dialog to document.body to cover sidenav in docs app
             // Modal dialogs should fully cover application to prevent interaction outside of dialog
             parent: angular.element(document.body),
