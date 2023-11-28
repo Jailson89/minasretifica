@@ -27,15 +27,15 @@
 				<md-list class="gridPecas">
 					<md-list-item class="secondary-button-padding">
 						<span class="nome">Nome</span>
-						<span class="descricao">Descrição</span>
 						<span class="valor">Valor</span>
+						<span class="descricao">Descrição</span>
 					</md-list-item>
 					<md-list-item flex ng-repeat="peca in pecas" class="secondary-button-padding"
 						ng-click="doPrimaryAction($event)">
 
-						<span class="nome">{{ peca.nome }}</span>
-						<span class="descricao">{{ peca.descricao }}</span>
-						<span class="valor">{{ peca.valor }}</span>
+						<span class="nome"> {{ peca.nome }}</span>
+						<span class="valor">R$ {{ peca.valor }}</span>
+						<span flex class="descricao">{{ peca.descricao }}</span>
 						
 						<md-button ng-click="editarPeca()" class="md-icon-button" aria-label="More">
 							<md-icon>edit</md-icon>

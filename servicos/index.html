@@ -27,15 +27,15 @@
 				<md-list class="gridServicos">
 					<md-list-item class="secondary-button-padding">
 						<span class="nome">Nome</span>
-						<span class="descricao">Descrição</span>
 						<span class="valor">Valor</span>
+						<span flex class="descricao">Descrição</span>
 					</md-list-item>
 					<md-list-item flex ng-repeat="servico in servicos" class="secondary-button-padding"
 						ng-click="doPrimaryAction($event)">
 
 						<span class="nome">{{ servico.nome }}</span>
-						<span class="descricao">{{ servico.descricao }}</span>
-						<span class="valor">{{ servico.valor }}</span>
+						<span class="valor">R$ {{ servico.valor }}</span>
+						<span flex class="descricao">{{ servico.descricao }}</span>
 						
 						<md-button ng-click="editarServico()" class="md-icon-button" aria-label="More">
 							<md-icon>edit</md-icon>

@@ -1,30 +1,48 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 	  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style type="text/css">
-            .toolbar {
-              background-color: #d11111 !important;
-			  box-shadow: 0px 2px 5px black;
-            }
-        </style>
+		<link href="css/indexPrincipal.css" rel="stylesheet">
 	</head>
-	<body ng-app="MinasRetifica">
-		<md-content>
+	<body ng-app="MinasRetifica" layout="column" flex>
+		<md-content ng-controller="MinasRetificaController" layout="column" flex>
 			<md-toolbar class="toolbar">
+				
 				<div class="md-toolbar-tools">
-	
+				  <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="toggleLeft()">
+					<md-icon >menu</md-icon>
+				  </md-button>
+
 				  <h2 flex md-truncate>Minas Retifica</h2>
-		  
 				</div>
 			  </md-toolbar>
 			  <br>
+			  <div flex >
+				<md-sidenav class="md-sidenav-left menu-principal" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+				  <md-content flex>
+				  
+				  <md-list >
+					 <md-list-item ng-click="redirecionar('clientes')">
+						<md-icon >contact</md-icon>
+						<p> Clientes </p>
+					  </md-list-item>
+					  <md-list-item ng-click="redirecionar('pecas')">
+						<md-icon md-svg-icon="cached"></md-icon>
+						<p>Peças</p>
+					  </md-list-item>
+					  <md-list-item ng-click="redirecionar('servicos')">
+						<md-icon md-svg-icon="cached"></md-icon>
+						<p>Serviço</p>
+					  </md-list-item>
+					
+				  </md-list>
+				  </md-content>
+				</md-sidenav>
+			  </div>
 		</md-content>
-		<div ng-controller="MinasRetificaController">
-			
-		</div>
+		
 		<script src="node_modules/angular/angular.js"></script>
 		<script src="node_modules/angular-aria/angular-aria.js"></script>
 		<script src="node_modules/angular-animate/angular-animate.js"></script>
@@ -34,9 +52,22 @@
 		// Include app dependency on ngMaterial
 			var MinasRetifica = angular.module('MinasRetifica', ['ngMaterial', 'ngMessages']);
 			
-			MinasRetifica.controller("MinasRetificaController", ['$scope', function($scope) {
+			MinasRetifica.controller("MinasRetificaController", ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
 			    var vm = $scope;
 				vm.teste = "jailson";
+
+				$scope.toggleLeft = buildToggler('left');
+
+				function buildToggler(componentId) {
+					  return function() {
+							console.log(componentId);
+							$mdSidenav(componentId).toggle();
+					  };
+				}
+				$scope.redirecionar = function(destino) {
+					window.location.href = "http://localhost/minasretifica/" + destino;
+				}
+				
 
 			}]);
 		
