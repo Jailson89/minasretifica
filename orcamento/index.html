@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../node_modules/angular-material/angular-material.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="../css/clientes.css" rel="stylesheet">
+	<style type="text/css"></style>
+</head>
+
+<body ng-app="Clientes">
+	<md-toolbar md-scroll-shrink ng-if="true" class="toolbar">
+		<div class="md-toolbar-tools">
+			<h2 flex md-truncate>Minas Retifica</h2>
+		</div>
+	</md-toolbar>
+	<br>
+	<label class="labelCLientes">
+		Orçamento
+	</label>
+	<br><br><br><br>
+
+	<div ng-controller="ClientesController" id="toast-container" class="conteudoCliente" layout="column" style="height:400px" ng-cloak>
+		<md-content flex >
+			<div class="clientesControler" ng-controller="ClientesController">
+			
+				<md-input-container>
+				  <label>Cliente</label>
+				  <input type=text value="RONEY">
+				</md-input-container>
+				
+				<md-input-container>
+				  <label>Placa</label>
+				  <input type=text value="MSV2E29">
+				</md-input-container>
+				<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">+ Peças</md-button>
+				<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">+ Serviços</md-button>
+				<md-list class="gridCLientes">
+					<md-list-item class="secondary-button-padding">
+						<span flex="30" class="telefone">Veiculo</span>
+						<span flex="20" class="cpf">Peça/Serviço</span>
+						<span flex="40"  class="endereco">Valor</span>
+					</md-list-item>
+					<md-list-item flex class="secondary-button-padding"
+						ng-click="doPrimaryAction($event)">
+						<span flex="30" class="telefone">MSV2E29</span>
+						<span flex="20" class="cpf">Retifica Cabeçote</span>
+						<span flex="40"  class="endereco">R$ 400,00</span>
+
+
+						<md-button ng-click="editarCliente( cliente  )" class="md-icon-button" aria-label="More">
+							<md-icon>edit</md-icon>
+						</md-button>
+						<md-button ng-click="deletar(cliente.id);" class="md-icon-button rigth" aria-label="More">
+							<md-icon>delete</md-icon>
+						</md-button>
+					</md-list-item>
+					<md-list-item flex class="secondary-button-padding"
+						ng-click="doPrimaryAction($event)">
+						<span flex="30" class="telefone">ABV2E29</span>
+						<span flex="20" class="cpf">Biela</span>
+						<span flex="40"  class="endereco">R$ 59,00</span>
+
+
+						<md-button ng-click="editarCliente( cliente  )" class="md-icon-button" aria-label="More">
+							<md-icon>edit</md-icon>
+						</md-button>
+						<md-button ng-click="deletar(cliente.id);" class="md-icon-button rigth" aria-label="More">
+							<md-icon>delete</md-icon>
+						</md-button>
+					</md-list-item>
+					<md-list-item flex class="secondary-button-padding"
+						ng-click="doPrimaryAction($event)">
+						<span flex="30" class="telefone"></span>
+						<span flex="20" class="cpf">Valor Total:</span>
+						<span flex="40"  class="endereco">R$ 459,00</span>
+					</md-list-item>
+				</md-list>
+				<md-button class="md-raised md-primary" ng-click="showAdvanced($event)">Salvar orçamento</md-button>
+			</div>
+		</md-content>
+	</div>
+	<script src="../node_modules/angular/angular.js"></script>
+	<script src="../node_modules/angular-aria/angular-aria.js"></script>
+	<script src="../node_modules/angular-animate/angular-animate.js"></script>
+	<script src="../node_modules/angular-messages/angular-messages.js"></script>
+	<script src="../node_modules/angular-material/angular-material.js"></script>
+	<script src="clientesControler.js"></script>
+</body>
+
+</html>
